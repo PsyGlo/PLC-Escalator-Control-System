@@ -1,40 +1,35 @@
 # 🚀 PLC Escalator Control System (Demand-Driven)
 
-This project implements an intelligent escalator control system designed for energy efficiency and passenger safety. Using a **Master/Slave Grafcet architecture**, the system "remembers" when a passenger is on the stairs, ensuring the motor continues to run until they safely reach the top.
+This project demonstrates an industrial escalator control system developed in **Schneider Control Expert (Unity Pro)**. It uses a Master/Slave Grafcet architecture to ensure the motor only runs when passengers are present and safely clears the stairs before stopping.
 
 ---
 
-### 🧠 Logic Architecture (Master/Slave)
-The system is divided into two specialized sections to handle concurrent monitoring and execution:
+### 🧠 Master/Slave Logic (The "Memory" Link)
+The project is split into two functional SFC sections. Because the software uses hierarchical naming, the coordination is handled via **Step Activity Bits**:
 
-* **G_MEMO (The Memory):** Monitors the presence sensor (`p`). When triggered, it enters a timed state that persists for the duration of the transit (e.g., 15 seconds), effectively "counting" the presence of passengers.
-* **G_MOTEUR (The Drive):** Controls the motor contactor (`KM1`). It only activates if the system is started (**BPM**) AND the Memory is active (**X10**). 
+* **G_MEMO (Master - Section 1):** * Initial State: `S_1_1`
+    * Memory/Timer State: `S_1_2` (Triggered by presence sensor `p`).
+* **G_MOTEUR (Slave - Section 2):**
+    * Uses the condition `S_1_2.X` to determine if the motor should be running.
+    * This ensures the motor stays active for the full duration of the timer defined in the Master chart.
 
-> **💡 Technical Note on Retriggerable Logic:** > The use of the `G_MEMO` chart creates a "retriggerable" effect. Even if the sensor `p` only detects a passenger for a split second, the Memory Grafcet ensures the motor remains active long enough for the person to reach the destination. This prevents the motor from "stuttering" or stopping prematurely while a passenger is halfway up.
+> **💡 Technical Note on Step Naming:** > In this implementation, we utilize the `.X` suffix (e.g., `S_1_2.X`). This allows for deterministic communication between separate SFC sections without the need for intermediate boolean variables, reducing memory overhead and scan-time latency.
 
 ---
 
-### ⚙️ Input/Output Mapping (Physical PLC)
-Mapped for testing on a Schneider Modicon M340/M580 rack:
+### ⚙️ I/O Mapping & Hardware Configuration
+Targeted for a **Schneider Modicon M340/M580** rack:
 
 | Variable | Address | Type | Description |
 | :--- | :--- | :--- | :--- |
-| **BPM** | `%I0.2.0` | EBOOL | Start Button (Normally Open) |
-| **BPA** | `%I0.2.1` | EBOOL | Stop Button (Normally Closed / Safety) |
-| **p** | `%I0.2.2` | EBOOL | Presence Sensor (Photo-cell) |
-| **KM1** | `%Q0.3.0` | EBOOL | Motor Contactor / Output Indicator |
+| **BPM** | `%I0.2.0` | EBOOL | Start Button (Bouton Marche) |
+| **BPA** | `%I0.2.1` | EBOOL | Stop Button (Bouton Arrêt - Safety) |
+| **p** | `%I0.2.2` | EBOOL | Presence Sensor (Sensor) |
+| **KM1** | `%Q0.3.0` | EBOOL | Motor Contactor (Qualitative N) |
 
 ---
 
-### 🛡️ Safety Implementation
-The system includes a **Priority Stop** logic. The motor will immediately cease operation if:
-1. The **BPA** (Stop Button) is pressed.
-2. An **INITCHART** command is received via the safety task.
-3. No passengers have been detected for the duration of the transition timer.
-
----
-
-### 🛠 Tech Stack
-* **Platform:** Schneider Control Expert (Unity Pro)
-* **Languages:** SFC (Grafcet) for sequences, LD (Ladder) for safety.
-* **PLC Target:** Modicon M340 / M580 Simulator.
+### 🛠 How to Test
+1. Restore the `.sta` file in Control Expert.
+2. Observe the `G_MOTEUR` transitions. You will see they are linked directly to the status of `S_1_2` in the `G_MEMO` section.
+3. Use the **Animation Table** to force the `p` sensor and watch the timer count down in `G_MEMO`.
