@@ -1,35 +1,38 @@
 # 🚀 PLC Escalator Control System (Demand-Driven)
 
-This project demonstrates an industrial escalator control system developed in **Schneider Control Expert (Unity Pro)**. It uses a Master/Slave Grafcet architecture to ensure the motor only runs when passengers are present and safely clears the stairs before stopping.
+This repository contains the implementation of an energy-efficient escalator control system. It uses **concurrent Grafcet sections** to manage passenger detection and motor execution separately.
 
 ---
 
-### 🧠 Master/Slave Logic (The "Memory" Link)
-The project is split into two functional SFC sections. Because the software uses hierarchical naming, the coordination is handled via **Step Activity Bits**:
+### 🧠 Master/Slave Coordination
+The logic is split into two specialized SFC sections within the `MAST` task:
 
-* **G_MEMO (Master - Section 1):** * Initial State: `S_1_1`
-    * Memory/Timer State: `S_1_2` (Triggered by presence sensor `p`).
-* **G_MOTEUR (Slave - Section 2):**
-    * Uses the condition `S_1_2.X` to determine if the motor should be running.
-    * This ensures the motor stays active for the full duration of the timer defined in the Master chart.
+* **Section 1 (G_MEMO):** * Acts as the system "Memory." 
+    * When a passenger is detected (`p`), it moves to step **S_1_2**.
+    * It uses the transition syntax `t#15s / S_1_2.X` to ensure the system remembers the passenger for exactly 15 seconds.
+* **Section 2 (G_MOTEUR):** * Acts as the "Drive Controller."
+    * It monitors the activity bit of the memory step (**S_1_2.X**).
+    * **Start Condition:** `BPM AND S_1_2.X`
+    * **Stop Condition:** `BPA OR NOT S_1_2.X`
 
-> **💡 Technical Note on Step Naming:** > In this implementation, we utilize the `.X` suffix (e.g., `S_1_2.X`). This allows for deterministic communication between separate SFC sections without the need for intermediate boolean variables, reducing memory overhead and scan-time latency.
+> **💡 Technical Insight:** > By using the `.X` activity bit of a step from a different section, we achieve **deterministic synchronization**. This ensures that the motor can never run unless the memory timer is active, providing a fail-safe relationship between sensors and actuators.
 
 ---
 
-### ⚙️ I/O Mapping & Hardware Configuration
-Targeted for a **Schneider Modicon M340/M580** rack:
+### ⚙️ I/O Configuration
+Mapped for the Schneider Modicon M340/M580 PLC:
 
-| Variable | Address | Type | Description |
+| Variable | Address | Type | Role |
 | :--- | :--- | :--- | :--- |
-| **BPM** | `%I0.2.0` | EBOOL | Start Button (Bouton Marche) |
-| **BPA** | `%I0.2.1` | EBOOL | Stop Button (Bouton Arrêt - Safety) |
-| **p** | `%I0.2.2` | EBOOL | Presence Sensor (Sensor) |
-| **KM1** | `%Q0.3.0` | EBOOL | Motor Contactor (Qualitative N) |
+| **BPM** | `%I0.2.0` | EBOOL | Start Button |
+| **BPA** | `%I0.2.1` | EBOOL | Stop Button (Priority) |
+| **p** | `%I0.2.2` | EBOOL | Presence Sensor |
+| **KM1** | `%Q0.3.0` | EBOOL | Motor Output (Step Action: N) |
 
 ---
 
-### 🛠 How to Test
-1. Restore the `.sta` file in Control Expert.
-2. Observe the `G_MOTEUR` transitions. You will see they are linked directly to the status of `S_1_2` in the `G_MEMO` section.
-3. Use the **Animation Table** to force the `p` sensor and watch the timer count down in `G_MEMO`.
+### 🛠 How to Restore
+1. Open Schneider Control Expert.
+2. Go to **File > Restore Archive** and select the `.sta` file.
+3. Build the project and transfer it to the **PLC Simulator**.
+4. Use the **Animation Table** to toggle `p` and watch the 15s countdown in the `G_MEMO` transition.
