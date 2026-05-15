@@ -17,8 +17,8 @@ This folder contains all screenshots and visual documentation of the **Escalier 
 | `LOGIC_MOTEUR_ST.jpg`             | Structured Text safety logic |
 | `Variables_List.jpg`              | Complete list of variables with comments |
 | `PLC_Configuration.jpg`           | TSX P57 2634M rack configuration |
-| `Running_State.jpg`               | System running normally |
-| `Emergency_Stop.jpg`              | Emergency stop (BPA) behavior |
+| `Running_State.mp4`               | System running normally |
+| `Emergency_Stop.mp4`              | Emergency stop (BPA) behavior |
 
 ---
 
