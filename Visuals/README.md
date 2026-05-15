@@ -27,7 +27,6 @@ This folder contains all screenshots and visual documentation of the **Escalier 
 - Visual proof of correct Grafcet execution
 - Demonstration of HMI animation and supervision
 - Support material for presentation and teacher evaluation
-- Before/After comparison during development
 
 ---
 
