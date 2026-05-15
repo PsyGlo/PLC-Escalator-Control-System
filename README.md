@@ -8,7 +8,7 @@
 ### 📋 Project Description
 
 Implementation of a realistic escalator control system using **Multi-Grafcet** techniques. The system uses a memory Grafcet (`G_MEMO`) with a 15-second retriggerable timer to validate passenger presence before allowing the escalator to start. A separate motor control Grafcet (`G_MOTEUR`) manages safe start/stop sequences with emergency priority.
-![System Preview](./Visuals/Figure_1.jpg)
+![System Preview](./Visuals/Figure_1.png)
 *Figure 1: Full system running in Control Expert Simulator showing G_MEMO and G_MOTEUR coordination.*
 
 ---
