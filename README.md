@@ -58,4 +58,8 @@ Implementation of a realistic escalator control system using **Multi-Grafcet** (
 
 ---
 
+
 ### 🎓 Academic Context
+
+This implementation is part of the **TSAII** (Technicien Supérieur en Automatique et Informatique Industrielle) curriculum. 
+*For detailed credits regarding the AFPA source material, please refer to the [CREDITS.md](./CREDITS.md) file.*
