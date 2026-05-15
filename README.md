@@ -57,7 +57,7 @@ Watch the logic in motion via the Control Expert Simulator:
 ### 🚀 Usage / How to Restore
 
 1. Open Schneider Control Expert.
-2. Go to **File > Restore Archive...** and select the `.sta` file from `Logic_Source/`.
+2. Go to **File > Restore Archive...** and select the `.stu` file from `Logic_Source/`.
 3. Go to **Build > Rebuild All Project**.
 4. Connect to the **PLC Simulator**, transfer the project, and set to **Run**.
 5. Use the **Animation Table** to monitor key variables.
