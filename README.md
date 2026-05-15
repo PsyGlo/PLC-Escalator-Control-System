@@ -15,7 +15,7 @@ Implementation of a realistic escalator control system using **Multi-Grafcet** (
 
 - **Software**: Schneider Control Expert v15 (Unity Pro)
 - **Languages**: SFC (Grafcet), Ladder (LD), Structured Text (ST)
-- **PLC Target**: Modicon M340 / M580 (Simulator)
+- **PLC Target**: Modicon Premium TSX P57 2634M (Simulator)
 - **HMI**: EcoStruxure Operator Terminal Expert
 
 ---
