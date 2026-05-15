@@ -48,9 +48,9 @@ Implementation of a realistic escalator control system using **Multi-Grafcet** t
 
 Watch the logic in motion via the Control Expert Simulator:
 
-* 🎞️ Normal operation with presence detection
-* 🛑 Emergency stop behavior
-* 👤 Normal stop when passenger leaves
+* 🎞️ **[Normal operation with presence detection](./Visuals/Video_G1_Operation.mp4)**
+* 🛑 **[Emergency stop behavior](./Visuals/Video_G1_Operation.mp4)**
+* 👤 **[Normal stop when passenger leaves](./Visuals/Video_G1_Operation.mp4)**
 
 ---
 
