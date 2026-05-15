@@ -29,7 +29,7 @@ Implementation of a realistic **escalator control system** using **Multi-Grafcet
 | **G_MEMO**         | SFC      | Passenger detection + 15s retriggerable timer    | [View PDF](/Documentation/G_MEMO.pdf) |
 | **G_MOTEUR**       | SFC      | Motor control (KM1/KM2) with safety logic        | [View PDF](/Documentation/G_MOTEUR.pdf) |
 | **TIMERS**         | Ladder   | TON 15-second presence validation                | [View PDF](/Documentation/TIMERS.pdf) |
-| **Init_Logic**     | Ladder   | Cold start + manual reset (INITCHART)            | [View PDF](/Documentation/Init_Logic.pdf) |
+| **init_logic**     | Ladder   | Cold start + manual reset (INITCHART)            | [View PDF](/Documentation/init_logic.pdf) |
 | **LOGIC_MOTEUR**   | ST       | Safety logic and output management               | [View PDF](/Documentation/LOGIC_MOTEUR.pdf) |
 
 ---
