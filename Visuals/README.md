@@ -8,17 +8,17 @@ This folder contains all screenshots and visual documentation of the **Escalier 
 
 | File                              | Description |
 |-----------------------------------|-----------|
-| `HMI_Ecran_Exploitation.png`      | Complete supervision screen (Écran d'Exploitation) |
-| `Animation_Table.png`             | Full animation table used for testing |
-| `G_MEMO_Full.png`                 | Complete view of G_MEMO Grafcet |
-| `G_MOTEUR_Full.png`               | Complete view of G_MOTEUR Grafcet |
-| `TIMERS_Ladder.png`               | TON timer ladder logic |
-| `Init_Logic.png`                  | Initialization logic with INITCHART |
-| `LOGIC_MOTEUR_ST.png`             | Structured Text safety logic |
-| `Variables_List.png`              | Complete list of variables with comments |
-| `PLC_Configuration.png`           | TSX P57 2634M rack configuration |
-| `Running_State.png`               | System running normally |
-| `Emergency_Stop.png`              | Emergency stop (BPA) behavior |
+| `HMI_Ecran_Exploitation.jpg`      | Complete supervision screen (Écran d'Exploitation) |
+| `Animation_Table.jpg`             | Full animation table used for testing |
+| `G_MEMO_Full.jpg`                 | Complete view of G_MEMO Grafcet |
+| `G_MOTEUR_Full.jpg`               | Complete view of G_MOTEUR Grafcet |
+| `TIMERS_Ladder.jpg`               | TON timer ladder logic |
+| `Init_Logic.jpg`                  | Initialization logic with INITCHART |
+| `LOGIC_MOTEUR_ST.jpg`             | Structured Text safety logic |
+| `Variables_List.jpg`              | Complete list of variables with comments |
+| `PLC_Configuration.jpg`           | TSX P57 2634M rack configuration |
+| `Running_State.jpg`               | System running normally |
+| `Emergency_Stop.jpg`              | Emergency stop (BPA) behavior |
 
 ---
 
